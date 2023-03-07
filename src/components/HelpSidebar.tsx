@@ -111,8 +111,8 @@ const HelpText: React.FC<{
   return (
     <>
       <div className={`help-text ${helpVisibility}`} ref={helpRef} />
-      {props.helpIsVisible == true ? (
-        props.youtubeId != undefined ? (
+      {props.helpIsVisible === true ? (
+        props.youtubeId !== undefined ? (
           <iframe
             // width="280"
             // height="158"
