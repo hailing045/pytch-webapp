@@ -19,6 +19,7 @@ export type BlockElementDescriptor = {
   scratchIsLong: boolean;
   help: ElementArray;
   helpIsVisible: boolean;
+  youtubeId?: string;
 };
 
 export type NonMethodBlockElementDescriptor = {
@@ -92,6 +93,7 @@ const makeBlockElementDescriptor = (raw: any): BlockElementDescriptor => ({
   scratchIsLong: raw.scratchIsLong ?? false,
   help: makeHelpTextElements(raw.help),
   helpIsVisible: false,
+  youtubeId: raw.youtubeId,
 });
 
 const makeNonMethodBlockElementDescriptor = (

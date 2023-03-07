@@ -121,14 +121,26 @@ const CodeAceEditor = () => {
   );
 };
 
+const CodeView = () => {
+  const codeTest = useStoreState(
+    (state) => state.activeProject.codeTextOrPlaceholder
+  );
+  return (
+    <div className="CodeView">
+      <pre>{codeTest}</pre>
+    </div>
+  );
+};
+
 const CodeEditor = () => {
+  const interfaceMode = useStoreState((state) => state.ideLayout.interfaceMode);
   return (
     <div className="CodeEditor">
       <div className="help-sidebar">
         <HelpSidebar />
         <HelpSidebarOpenControl />
       </div>
-      <CodeAceEditor />
+      {interfaceMode == "editing" ? <CodeAceEditor /> : <CodeView />}
     </div>
   );
 };

@@ -84,9 +84,11 @@ const ScratchAndButtons: React.FC<IScratchAndPython & IToggleHelp> = (
   );
 };
 
-const HelpText: React.FC<{ helpIsVisible: boolean; help: ElementArray }> = (
-  props
-) => {
+const HelpText: React.FC<{
+  helpIsVisible: boolean;
+  help: ElementArray;
+  youtubeId?: string;
+}> = (props) => {
   const helpVisibility = props.helpIsVisible ? "shown" : "hidden";
   const helpRef: React.RefObject<HTMLDivElement> = React.createRef();
 
@@ -106,7 +108,30 @@ const HelpText: React.FC<{ helpIsVisible: boolean; help: ElementArray }> = (
     }
   });
 
-  return <div className={`help-text ${helpVisibility}`} ref={helpRef} />;
+  return (
+    <>
+      <div className={`help-text ${helpVisibility}`} ref={helpRef} />
+      {props.helpIsVisible == true ? (
+        props.youtubeId != undefined ? (
+          <iframe
+            // width="280"
+            // height="158"
+            width="320"
+            height="180"
+            src={"https://www.youtube.com/embed/" + props.youtubeId}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <p>No Video Availiable So Far</p>
+        )
+      ) : (
+        <p></p>
+      )}
+    </>
+  );
 };
 
 const BlockElement: React.FC<
@@ -128,7 +153,11 @@ const BlockElement: React.FC<
         pythonToCopy={props.python}
       />
 
-      <HelpText help={props.help} helpIsVisible={props.helpIsVisible} />
+      <HelpText
+        help={props.help}
+        helpIsVisible={props.helpIsVisible}
+        youtubeId={props.youtubeId}
+      />
     </div>
   );
 };
