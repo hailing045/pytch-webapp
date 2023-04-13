@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-nord_dark";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/ext-searchbox";
 import { useStoreState, useStoreActions } from "../store";
@@ -37,6 +38,12 @@ const ReadOnlyOverlay = () => {
 };
 
 const CodeAceEditor = () => {
+  const fontSizeLabel = useStoreState(
+    (state) => state.ideLayout.accessibilitySidebar.fontSize
+  );
+  const editorThemeKind = useStoreState(
+    (state) => state.ideLayout.accessibilitySidebar.editorThemeKind
+  );
   const {
     codeTextOrPlaceholder,
     syncState,
@@ -99,17 +106,47 @@ const CodeAceEditor = () => {
   // because it is typed as taking either a boolean or an array of
   // strings, whereas it will in fact take an array of class instances,
   // which is how we use it here.)
+  let fontSize;
+  switch (fontSizeLabel) {
+    case "small":
+      fontSize = 16;
+      break;
+    case "medium":
+      fontSize = 20;
+      break;
+    case "large":
+      fontSize = 24;
+      break;
+    default:
+      console.error("unknown font size label", fontSizeLabel);
+      fontSize = 16;
+      break;
+  }
 
+  let theme;
+  switch (editorThemeKind) {
+    case "dark":
+      theme = "nord_dark";
+      break;
+
+    case "light":
+      theme = "github";
+      break;
+    default:
+      console.error("unknown editorThemeKind", editorThemeKind);
+      theme = "github";
+      break;
+  }
   return (
     <>
       <AceEditor
         ref={aceRef}
         mode="python"
-        theme="github"
+        theme={theme}
         enableBasicAutocompletion={[new PytchAceAutoCompleter() as any]}
         value={codeTextOrPlaceholder}
         name="pytch-ace-editor"
-        fontSize={16}
+        fontSize={fontSize}
         width="100%"
         height="100%"
         onLoad={setGlobalRef}
@@ -133,14 +170,13 @@ const CodeView = () => {
 };
 
 const CodeEditor = () => {
-  const interfaceMode = useStoreState((state) => state.ideLayout.interfaceMode);
   return (
     <div className="CodeEditor">
       <div className="help-sidebar">
         <HelpSidebar />
         <HelpSidebarOpenControl />
       </div>
-      {interfaceMode == "editing" ? <CodeAceEditor /> : <CodeView />}
+      <CodeAceEditor />
     </div>
   );
 };

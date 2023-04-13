@@ -33,6 +33,10 @@ import {
 } from "./user-interactions/code-diff-help";
 import { uploadZipfilesInteraction } from "./user-interactions/upload-zipfiles";
 import { IHelpSidebar, helpSidebar } from "./help-sidebar";
+import {
+  IAccessibilitySidebar,
+  accessibilitySidebar,
+} from "./accessibility-sidebar"; ////
 
 import { stageWidth, stageHeight, stageFullScreenBorderPx } from "../constants";
 
@@ -73,6 +77,7 @@ export interface IIDELayout {
   buttonTourProgressIndex: number;
   buttonTourProgressStage: Computed<IIDELayout, ButtonTourStage | null>;
   helpSidebar: IHelpSidebar;
+  accessibilitySidebar: IAccessibilitySidebar; ////
   setKind: Action<IIDELayout, IDELayoutKind>;
   setIsFullScreen: Action<IIDELayout, boolean>;
   ensureNotFullScreen: Thunk<IIDELayout>;
@@ -203,6 +208,7 @@ export const ideLayout: IIDELayout = {
   }),
 
   helpSidebar,
+  accessibilitySidebar, ////
 };
 
 /** General modal dialog support. */

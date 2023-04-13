@@ -358,8 +358,11 @@ $speech-bubble-max-height: 180px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 1.5rem;
-      background-color: #88aaff;
+      //width: 1.5rem;
+      width: 3rem;
+      //background-color: #88aaff;
+      background-color: #7773e8;
+      //background-color: rgb(50, 232, 199);
       color: white;
       &:hover {
         cursor: pointer;
@@ -683,5 +686,24 @@ div.spacer-instead-of-resizer {
     code {
       color: black;
     }
+  }
+}
+
+.accessibilitySidebar {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 30%;
+  right: 0px;
+  align-items: "center";
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(50, 232, 199);
+  //background-color: rgb(150, 217, 132);
+  &.hidden {
+    visibility: hidden;
+  }
+  &.shown {
+    visibility: shown;
   }
 }

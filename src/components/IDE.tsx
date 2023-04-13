@@ -14,6 +14,8 @@ import { Link } from "./LinkWithinApp";
 import VerticalResizer from "./VerticalResizer";
 import { IDELayoutKind } from "../model/ui";
 import { assertNever } from "../utils";
+import { accessibilitySidebar } from "../model/accessibility-sidebar";
+import { AccessibilitySidebar } from "./Accessibility-sidebar";
 
 declare var Sk: any;
 
@@ -167,6 +169,7 @@ const IDE: React.FC<IDEProps> = ({ projectIdString }) => {
   return (
     <div className={`ProjectIDE ${kindTag}`}>
       {IDEContents(layoutKind, isFullScreen, stageDisplayWidth)}
+      <AccessibilitySidebar />
     </div>
   );
 };

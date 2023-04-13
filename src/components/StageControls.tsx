@@ -106,7 +106,9 @@ export const StageControls: React.FC<StageControlsProps> = ({
       sourceProjectId: projectId,
       nameOfCopy: projectName,
     });
-
+  const setIsVisible = useStoreActions(
+    (actions) => actions.ideLayout.accessibilitySidebar.setIsVisible
+  );
   return forFullScreen ? (
     <div className="StageControls">
       <div className="run-stop-controls">
@@ -131,6 +133,11 @@ export const StageControls: React.FC<StageControlsProps> = ({
       >
         <span>Save</span>
       </Button>
+
+      <Button onClick={() => setIsVisible(true)}>
+        <FontAwesomeIcon className="fa-lg" icon={"universal-access"} />
+      </Button>
+
       <Link to="/">
         <Button>
           <FontAwesomeIcon aria-label="Home" icon="home" />
